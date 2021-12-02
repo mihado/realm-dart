@@ -27,7 +27,7 @@ import 'package:test/test.dart' as testing;
 import '../lib/realm.dart';
 import '../lib/src/native/realm_core.dart' as core;
 
-part 'realm_test.gen.dart';
+part 'realm_test.g.dart';
 
 @RealmModel()
 class _Car {
