@@ -25,7 +25,7 @@ import 'package:test/test.dart';
 import 'package:test/test.dart' as testing;
 
 import '../lib/realm.dart';
-import '../lib/src/native/realm_core.dart' as core;
+import '../lib/src/realm_property.dart';
 
 part 'realm_test.g.dart';
 
