@@ -32,7 +32,7 @@ part 'realm_test.g.dart';
 @RealmModel()
 class _Car {
   @PrimaryKey()
-  late String make = "Tesla";
+  late final make = "Tesla";
 }
 
 @RealmModel()
@@ -43,7 +43,7 @@ class _Person {
 @RealmModel()
 class _Dog {
   @PrimaryKey()
-  late String name;
+  late final String name;
 
   late int? age;
 
