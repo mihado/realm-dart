@@ -53,7 +53,7 @@ class _Dog {
 @RealmModel()
 class _Team {
   late String name;
-  late List<_Person> players;
+  final players = <_Person>[];
 }
 
 String? testName;
@@ -509,7 +509,7 @@ Future<void> main([List<String>? args]) async {
       var config = Configuration([Team.schema, Person.schema]);
       var realm = Realm(config);
 
-      final team = Team("Ferrari", []);
+      final team = Team("Ferrari");
       realm.write(() => realm.add(team));
 
       final teams = realm.all<Team>();
@@ -523,7 +523,7 @@ Future<void> main([List<String>? args]) async {
       var config = Configuration([Team.schema, Person.schema]);
       var realm = Realm(config);
 
-      final team = Team("Ferrari", []);
+      final team = Team("Ferrari");
       realm.write(() => realm.add(team));
 
       final teams = realm.all<Team>();
@@ -551,7 +551,7 @@ Future<void> main([List<String>? args]) async {
       var config = Configuration([Team.schema, Person.schema]);
       var realm = Realm(config);
 
-      final team = Team("Ferrari", []);
+      final team = Team("Ferrari");
       realm.write(() => realm.add(team));
 
       final teams = realm.all<Team>();
@@ -565,7 +565,7 @@ Future<void> main([List<String>? args]) async {
       var config = Configuration([Team.schema, Person.schema]);
       var realm = Realm(config);
 
-      final team = Team("Ferrari", []);
+      final team = Team("Ferrari");
       realm.write(() => realm.add(team));
 
       final teams = realm.all<Team>();
