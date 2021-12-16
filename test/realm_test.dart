@@ -53,7 +53,7 @@ class _Dog {
 @RealmModel()
 class _Team {
   late String name;
-  late List<_Person> players = [];
+  late List<_Person> players;
 }
 
 String? testName;
@@ -285,7 +285,7 @@ Future<void> main([List<String>? args]) async {
       var config = Configuration([Car.schema]);
       var realm = Realm(config);
 
-      expect(() => realm.write(() => realm.add(Person(name: ''))),
+      expect(() => realm.write(() => realm.add(Person(''))),
           throws<RealmException>("not configured"));
     });
 
@@ -354,8 +354,8 @@ Future<void> main([List<String>? args]) async {
       var realm = Realm(config);
 
       final dog = Dog(
-        name: "MyDog",
-        owner: Person(name: "MyOwner"),
+        "MyDog",
+        owner: Person("MyOwner"),
       );
       realm.write(() {
         realm.add(dog);
@@ -371,8 +371,8 @@ Future<void> main([List<String>? args]) async {
       var realm = Realm(config);
 
       final dog = Dog(
-        name: "MyDog",
-        owner: Person(name: "MyOwner"),
+        "MyDog",
+        owner: Person("MyOwner"),
         age: 5,
       );
       realm.write(() {
@@ -509,7 +509,7 @@ Future<void> main([List<String>? args]) async {
       var config = Configuration([Team.schema, Person.schema]);
       var realm = Realm(config);
 
-      final team = Team(name: "Ferrari");
+      final team = Team("Ferrari", []);
       realm.write(() => realm.add(team));
 
       final teams = realm.all<Team>();
@@ -523,7 +523,7 @@ Future<void> main([List<String>? args]) async {
       var config = Configuration([Team.schema, Person.schema]);
       var realm = Realm(config);
 
-      final team = Team(name: "Ferrari");
+      final team = Team("Ferrari", []);
       realm.write(() => realm.add(team));
 
       final teams = realm.all<Team>();
@@ -532,12 +532,12 @@ Future<void> main([List<String>? args]) async {
       expect(players, isNotNull);
       expect(players.length, 0);
 
-      realm.write(() => players.add(Person(name: "Michael Schumacher")));
+      realm.write(() => players.add(Person("Michael Schumacher")));
       expect(players.length, 1);
 
       realm.write(() => players.addAll([
-            Person(name: "Sebastian Vettel"),
-            Person(name: "Kimi Räikkönen"),
+            Person("Sebastian Vettel"),
+            Person("Kimi Räikkönen"),
           ]));
 
       expect(players.length, 3);
@@ -551,7 +551,7 @@ Future<void> main([List<String>? args]) async {
       var config = Configuration([Team.schema, Person.schema]);
       var realm = Realm(config);
 
-      final team = Team(name: "Ferrari");
+      final team = Team("Ferrari", []);
       realm.write(() => realm.add(team));
 
       final teams = realm.all<Team>();
@@ -565,15 +565,15 @@ Future<void> main([List<String>? args]) async {
       var config = Configuration([Team.schema, Person.schema]);
       var realm = Realm(config);
 
-      final team = Team(name: "Ferrari");
+      final team = Team("Ferrari", []);
       realm.write(() => realm.add(team));
 
       final teams = realm.all<Team>();
       final players = teams[0].players;
 
-      expect(() => realm.write(() => players[-1] = Person(name: '')),
+      expect(() => realm.write(() => players[-1] = Person('')),
           throws<RealmException>("Index out of range"));
-      expect(() => realm.write(() => players[800] = Person(name: '')),
+      expect(() => realm.write(() => players[800] = Person('')),
           throws<RealmException>());
     });
   });
