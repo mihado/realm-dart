@@ -28,7 +28,7 @@ jobs:
       - name: Setup Ninja
         uses: seanmiddleditch/gha-setup-ninja@master
 
-      - name: Build Ralm Dart for Linux
+      - name: Build Realm Dart for Linux
         run: ./scripts/build-linux.sh
 
       # Note: This workflow uses the latest stable version of the Dart SDK.
@@ -42,4 +42,32 @@ jobs:
         run: dart pub get
 
       - name: Run tests
-        run: dart test -r expanded
+        run: dart test --reporter expanded --coverage coverage/
+
+      - name: Generate coverage report
+        run: |
+          dart run coverage:format_coverage \
+            --in coverage/ \
+            --out coverage/lcov.info \
+            --check-ignore \
+            --lcov \
+            --packages .packages \
+            --report-on lib
+
+      - name: Run generator tests
+        run: |
+          pushd generator
+          dart test --reporter expanded --coverage coverage/
+          popd
+
+      - name: Generate generator coverage report
+        run: |
+          pushd generator
+          dart run coverage:format_coverage \
+            --in coverage/ \
+            --out coverage/lcov.info \
+            --check-ignore \
+            --lcov \
+            --packages .packages \
+            --report-on lib
+          popd
